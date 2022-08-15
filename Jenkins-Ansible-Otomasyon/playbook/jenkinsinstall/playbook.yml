@@ -1,0 +1,32 @@
+---
+- hosts: 10.10.10.105, 10.10.10.149
+  gather_facts: no
+
+
+  vars_prompt:
+  - name: "username"
+    prompt: "Username"
+    private: no
+
+  tasks:
+  - name: SYS | Get NTP Configuration
+    shell: wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+    
+
+  - name: SYS | Get NTP Configuration
+    shell: echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list
+  
+  - name: Update Repository cache
+    apt:
+     update_cache: true
+     cache_valid_time: 3600
+     force_apt_get: true
+
+  - name: Install apache httpd
+    apt : 
+    with_items:
+      - jenkins 
+     
+
+  
+ #YigitGuvenir

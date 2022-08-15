@@ -1,0 +1,16 @@
+- hosts: testHosts,
+  gather_facts: no
+
+  vars_prompt:
+  - name: "username"
+    prompt: "Username"
+    private: no
+
+  tasks:
+  - name: SYS | Get NTP Configuration
+    shell: echo; hostname;  chronyc sources; echo;
+    register: ntpconf
+
+  - debug: msg={{ ntpconf.stdout }}
+
+  - local_action: lineinfile line={{ ntpconf.stdout }} insertafter=EOF path=/etc/ansible/playbook/ntpconf/ntpconf.txt
