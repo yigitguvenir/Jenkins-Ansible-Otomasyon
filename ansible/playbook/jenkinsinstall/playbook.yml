@@ -11,7 +11,7 @@
   tasks:
   - name: SYS | Get NTP Configuration
     shell: wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
-    #register: ntpconf
+    
 
   - name: SYS | Get NTP Configuration
     shell: echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list
@@ -28,6 +28,5 @@
       - jenkins 
      
 
-  #- debug: msg={{ ntpconf.stdout }}
-
-  #- local_action: lineinfile line={{ ntpconf.stdout }} insertafter=EOF path=/etc/ansible/playbooks/getNTPconf/ntpconf.tx
+  
+ #YigitGuvenir
